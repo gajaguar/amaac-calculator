@@ -4,6 +4,7 @@
     <div class="control">
       <input
         :id="id"
+        :class="color"
         :max="max"
         :maxlength="max"
         :min="min"
@@ -25,6 +26,11 @@ export default {
   name: 'AppField',
 
   props: {
+    color: {
+      type: String,
+      required: false,
+      default: ''
+    },
     id: {
       type: String,
       required: false,
@@ -35,13 +41,13 @@ export default {
       required: true
     },
     max: {
-      type: Number,
+      type: String,
       required: false
     },
     min: {
-      type: Number,
+      type: String,
       required: false,
-      default: 0
+      default: '0'
     },
     readonly: {
       type: Boolean,
@@ -56,7 +62,7 @@ export default {
     type: {
       type: String,
       required: false,
-      default: 'text'
+      default: 'number'
     },
     value: {
       type: String,
@@ -70,6 +76,8 @@ export default {
     if (!caption) return ''
     caption = caption.replace(' _', '<sub>', 'gi')
     caption = caption.replace('_ ', '</sub>', 'gi')
+    caption = caption.replace(' ^', '<sup>', 'gi')
+    caption = caption.replace('^ ', '</sup>', 'gi')
     label.innerHTML = caption
   },
 
