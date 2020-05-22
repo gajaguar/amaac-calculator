@@ -3,8 +3,8 @@
     <label :for="id" class="label" ref="label"> </label>
     <div class="control">
       <input
-        :id="id"
         :class="color"
+        :id="id"
         :max="max"
         :maxlength="max"
         :min="min"
@@ -13,9 +13,8 @@
         :step="step"
         :type="type"
         :value="value"
-        @input="updateValue()"
+        @input="$emit('input', $event.target.value)"
         class="input"
-        ref="element"
       />
     </div>
   </div>
@@ -79,12 +78,6 @@ export default {
     caption = caption.replace(' ^', '<sup>', 'gi')
     caption = caption.replace('^ ', '</sup>', 'gi')
     label.innerHTML = caption
-  },
-
-  methods: {
-    updateValue() {
-      this.$emit('input', this.$refs.element.value)
-    }
   }
 }
 </script>
