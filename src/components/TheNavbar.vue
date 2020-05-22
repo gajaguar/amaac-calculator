@@ -34,6 +34,22 @@
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
+            Calculadoras
+          </a>
+
+          <div class="navbar-dropdown">
+            <router-link
+              :to="{ name: 'calculators.amaac' }"
+              v-slot="{ href, navigate }"
+            >
+              <a class="navbar-item" :href="href" @click="goAndClose(navigate)"
+                >Amaac</a
+              >
+            </router-link>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
             Generadores
           </a>
 
