@@ -1,3 +1,28 @@
+const aggregatesAbsorption = (wssd, wd) => {
+  // ABS = (Wssd - Wd) / Wd * 100
+  wssd = Number(wssd)
+  wd = Number(wd)
+  if (wssd === 0 || wd === 0) return '0.000'
+  return (((wssd - wd) / wd) * 100).toFixed(3)
+}
+
+const aggregatesApparentGravity = (wd, wi) => {
+  // Gsa = Wd / (Wd - Wi)
+  wd = Number(wd)
+  wi = Number(wi)
+  if (wd === 0 || wi === 0) return '0.000'
+  return (wd / (wd - wi)).toFixed(3)
+}
+
+const aggregatesBulkGravity = (wd, wssd, wi) => {
+  // Gsb = Wd / (Wssd - Wi)
+  wd = Number(wd)
+  wssd = Number(wssd)
+  wi = Number(wi)
+  if (wd === 0 || wssd === 0 || wi === 0) return '0.000'
+  return (wd / (wssd - wi)).toFixed(3)
+}
+
 const aggregatesByMixture = pb => {
   // Ps = 100 - Pb
   pb = Number(pb)
@@ -48,6 +73,9 @@ const asphaltWeight = (wbi, wbf) => {
 }
 
 export {
+  aggregatesAbsorption,
+  aggregatesApparentGravity,
+  aggregatesBulkGravity,
   aggregatesByMixture,
   asphaltByAggregates,
   asphaltByMixture,
