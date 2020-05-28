@@ -30,6 +30,16 @@ const aggregatesByMixture = pb => {
   return (100 - pb).toFixed(3)
 }
 
+const asphaltBulkGravity = (wp, wpw, wpb, wpbw) => {
+  // Gb = (Wpb - Wp) / ((Wpw - Wp) - (Wpbw - Wpb))
+  wpb = Number(wpb)
+  wp = Number(wp)
+  wpw = Number(wpw)
+  wpbw = Number(wpbw)
+  if (wpb === 0 || wp === 0 || wpw === 0 || wpbw === 0) return '0.000'
+  return ((wpb - wp) / (wpw - wp - (wpbw - wpb))).toFixed(3)
+}
+
 const asphaltByAggregates = (wbi, wbf, wp) => {
   // Pb' = (Wbi - Wbf) / (Wbf - Wp) * 100
   wbi = Number(wbi)
@@ -77,6 +87,7 @@ export {
   aggregatesApparentGravity,
   aggregatesBulkGravity,
   aggregatesByMixture,
+  asphaltBulkGravity,
   asphaltByAggregates,
   asphaltByMixture,
   asphaltFinalNetWeight,

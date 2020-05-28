@@ -3,6 +3,7 @@ export default {
 
   state: {
     abs: '',
+    gb: '',
     gsa: '',
     gsb: '',
     pb: '',
@@ -12,6 +13,7 @@ export default {
 
   getters: {
     abs: state => state.abs,
+    gb: state => state.gb,
     gsa: state => state.gsa,
     gsb: state => state.gsb,
     pb: state => state.pb,
@@ -22,6 +24,9 @@ export default {
   mutations: {
     updateAbs: (state, payload) => {
       state.abs = payload.value
+    },
+    updateGb: (state, payload) => {
+      state.gb = payload.value
     },
     updateGsa: (state, payload) => {
       state.gsa = payload.value
