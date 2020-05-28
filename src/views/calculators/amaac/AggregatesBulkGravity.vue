@@ -25,7 +25,7 @@
 </template>
 <script>
 import AppField from '@/components/AppField.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import {
   aggregatesAbsorption,
   aggregatesApparentGravity,
@@ -45,10 +45,6 @@ export default {
     wi: '',
     wssd: ''
   }),
-
-  computed: {
-    ...mapGetters('amaac', ['abs', 'gsa', 'gsb'])
-  },
 
   methods: {
     ...mapMutations('amaac', ['updateAbs', 'updateGsa', 'updateGsb']),
