@@ -2,35 +2,35 @@
   <div>
     <p class="title">Densidad Relativa Bruta del Agregado (G<sub>sb</sub>)</p>
     <form>
-      <!-- data -->
-      <app-field :label="labels[0]" step="0.1" v-model="wssd" />
-      <app-field :label="labels[1]" step="0.1" v-model="wi" />
-      <app-field :label="labels[2]" step="0.1" v-model="wd" />
-
-      <!-- results -->
       <app-field
-        color="is-primary"
-        :label="labels[3]"
-        :readonly="true"
-        :value="abs"
+        @input="calculateAll"
+        label="Masa de la muestra saturada superficialmente seca (g)"
+        step="0.1"
+        v-model="wssd"
       />
       <app-field
-        color="is-primary"
-        :label="labels[4]"
-        :readonly="true"
-        :value="gsb"
+        @input="calculateAll"
+        label="Masa de la muestra inmersa (g)"
+        step="0.1"
+        v-model="wi"
       />
       <app-field
-        color="is-primary"
-        :label="labels[5]"
-        :readonly="true"
-        :value="gsa"
+        @input="calculateAll"
+        label="Masa de la muestra seca (g)"
+        step="0.1"
+        v-model="wd"
       />
     </form>
   </div>
 </template>
 <script>
 import AppField from '@/components/AppField.vue'
+import { mapGetters, mapMutations } from 'vuex'
+import {
+  aggregatesAbsorption,
+  aggregatesApparentGravity,
+  aggregatesBulkGravity
+} from '@/utils/amaac'
 
 export default {
   name: 'AggregatesBulkGravity',
@@ -38,44 +38,36 @@ export default {
   components: { AppField },
 
   data: () => ({
-    labels: [
-      'Masa de la muestra saturada superficialmente seca (g)',
-      'Masa de la muestra inmersa (g)',
-      'Masa de la muestra seca (g)',
-      'Absorción (%)',
-      'Densidad relativa (seca) bruta del agregado [G _sb_ ]',
-      'Densidad relativa aparente del agregado [G _sa_ ]'
-    ],
-    wd: '0.0',
-    wi: '0.0',
-    wssd: '0.0'
+    aggregatesAbsorption,
+    aggregatesApparentGravity,
+    aggregatesBulkGravity,
+    wd: '',
+    wi: '',
+    wssd: ''
   }),
 
   computed: {
-    abs() {
-      // ABS = (Wssd - Wd) / Wd * 100
-      const wssd = Number(this.wssd)
-      const wd = Number(this.wd)
-      if (wssd === 0 || wd === 0) return '0.000'
-      const abs = ((wssd - wd) / wd) * 100
-      return abs.toFixed(3)
+    ...mapGetters('amaac', ['abs', 'gsa', 'gsb'])
+  },
+
+  methods: {
+    ...mapMutations('amaac', ['updateAbs', 'updateGsa', 'updateGsb']),
+    calculateAbs() {
+      const abs = this.aggregatesAbsorption(this.wssd, this.wd)
+      this.updateAbs({ value: abs })
     },
-    gsa() {
-      // Gsa = Wd / (Wd - Wi)
-      const wd = Number(this.wd)
-      const wi = Number(this.wi)
-      if (wd === 0 || wi === 0) return '0.000'
-      const gsa = wd / (wd - wi)
-      return gsa.toFixed(3)
+    calculateGsa() {
+      const gsa = this.aggregatesApparentGravity(this.wd, this.wi)
+      this.updateGsa({ value: gsa })
     },
-    gsb() {
-      // Gsb = Wd / (Wssd - Wi)
-      const wd = Number(this.wd)
-      const wssd = Number(this.wssd)
-      const wi = Number(this.wi)
-      if (wd === 0 || wssd === 0 || wi === 0) return '0.000'
-      const gsb = wd / (wssd - wi)
-      return gsb.toFixed(3)
+    calculateGsb() {
+      const gsb = this.aggregatesBulkGravity(this.wd, this.wssd, this.wi)
+      this.updateGsb({ value: gsb })
+    },
+    calculateAll() {
+      this.calculateAbs()
+      this.calculateGsa()
+      this.calculateGsb()
     }
   }
 }
