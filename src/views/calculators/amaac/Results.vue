@@ -28,7 +28,16 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('amaac', ['abs', 'gb', 'gsa', 'gsb', 'pb', 'pb_', 'ps'])
+    ...mapGetters('amaac', [
+      'abs',
+      'gb',
+      'gmb',
+      'gsa',
+      'gsb',
+      'pb',
+      'pb_',
+      'ps'
+    ])
   },
 
   watch: {
@@ -37,6 +46,9 @@ export default {
     },
     gb(value) {
       this.results[6].data = value
+    },
+    gmb(value) {
+      this.results[7].data = value
     },
     gsa(value) {
       this.results[5].data = value

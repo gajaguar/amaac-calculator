@@ -4,6 +4,7 @@ export default {
   state: {
     abs: '',
     gb: '',
+    gmb: '',
     gsa: '',
     gsb: '',
     pb: '',
@@ -14,6 +15,7 @@ export default {
   getters: {
     abs: state => state.abs,
     gb: state => state.gb,
+    gmb: state => state.gmb,
     gsa: state => state.gsa,
     gsb: state => state.gsb,
     pb: state => state.pb,
@@ -27,6 +29,9 @@ export default {
     },
     updateGb: (state, payload) => {
       state.gb = payload.value
+    },
+    updateGmb: (state, payload) => {
+      state.gmb = payload.value
     },
     updateGsa: (state, payload) => {
       state.gsa = payload.value

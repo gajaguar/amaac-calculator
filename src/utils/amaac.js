@@ -82,6 +82,15 @@ const asphaltWeight = (wbi, wbf) => {
   return (wbi - wbf).toFixed(3)
 }
 
+const mixtureBulkGravity = (wd, wssd, wi) => {
+  // Gmb = Wd / (Wssd - Wi)
+  wd = Number(wd)
+  wssd = Number(wssd)
+  wi = Number(wi)
+  if (wd === 0 || wssd === 0 || wi === 0) return '0.000'
+  return (wd / (wssd - wi)).toFixed(3)
+}
+
 export {
   aggregatesAbsorption,
   aggregatesApparentGravity,
@@ -92,5 +101,6 @@ export {
   asphaltByMixture,
   asphaltFinalNetWeight,
   asphaltInitialNetWeight,
-  asphaltWeight
+  asphaltWeight,
+  mixtureBulkGravity
 }
