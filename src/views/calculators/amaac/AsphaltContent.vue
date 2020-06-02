@@ -28,11 +28,8 @@
 <script>
 import AppField from '@/components/AppField.vue'
 import { mapGetters, mapMutations } from 'vuex'
-import {
-  aggregatesByMixture,
-  asphaltByAggregates,
-  asphaltByMixture
-} from '@/utils/amaac'
+import aggregates from '@/utils/amaac/calculations/aggregates'
+import asphalt from '@/utils/amaac/calculations/asphalt'
 
 export default {
   name: 'AsphaltContent',
@@ -40,9 +37,8 @@ export default {
   components: { AppField },
 
   data: () => ({
-    aggregatesByMixture,
-    asphaltByAggregates,
-    asphaltByMixture,
+    aggregates,
+    asphalt,
     wbi: '',
     wbf: '',
     wp: ''
@@ -55,15 +51,15 @@ export default {
   methods: {
     ...mapMutations('amaac', ['updatePb_', 'updatePb', 'updatePs']),
     calculatePb() {
-      const pb = this.asphaltByMixture(this.pb_)
+      const pb = this.asphalt.content.byMixture(this.pb_)
       this.updatePb({ value: pb })
     },
     calculatePb_() {
-      const pb_ = this.asphaltByAggregates(this.wbi, this.wbf, this.wp)
+      const pb_ = this.asphalt.content.byAggregates(this.wbi, this.wbf, this.wp)
       this.updatePb_({ value: pb_ })
     },
     calculatePs() {
-      const ps = this.aggregatesByMixture(this.pb)
+      const ps = this.aggregates.content.byMixture(this.pb)
       this.updatePs({ value: ps })
     },
     calculateAll() {

@@ -3,31 +3,35 @@
     <p class="title">VACÍOS DEL AGREGADO MINERAL (VMA)</p>
     <form>
       <app-field
+        @input="calculateGmb"
         type="number"
-        label="DENSIDAD BRUTA DE LA MEZCLA COMPACTA (G _mb_ )"
-        v-model="gmb"
+        label="Densidad relativa bruta de la mezcla compacta (G _mb_ )"
+        v-model="gmb_"
       />
       <app-field
+        @input="calculatePs"
         type="number"
-        label="PORCENTAJE DE AGREGADOS EN LA MEZCLA (P _s_ )"
-        v-model="ps"
+        label="Contenido de agregado en la mezcla (P _s_ )"
+        v-model="ps_"
       />
       <app-field
+        @input="calculateGsb"
         type="number"
-        label="DENSIDAD BRUTA DEL AGREGADO (G _sb_ )"
-        v-model="gsb"
+        label="Densidad relativa (seca) bruta del agregado (G _sb_ )"
+        v-model="gsb_"
       />
       <app-field
         :value="vma"
         :readonly="true"
         type="number"
-        label="VACÍOS DEL AGREGADO MINERAL (VMA)"
+        label="Vacíos ocupados por el agregado mineral (VMA)"
       />
     </form>
   </div>
 </template>
 <script>
 import AppField from '@/components/AppField.vue'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AmaacVma',
@@ -35,23 +39,51 @@ export default {
   components: { AppField },
 
   data: () => ({
-    gmb: '0.000',
-    gsb: '0.000',
-    ps: '0.000'
+    gmb_: '',
+    gsb_: '',
+    ps_: ''
   }),
 
   computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
+    ...mapGetters('amaac', ['gmb', 'gsb', 'ps']),
     vma() {
       // VMA = 100 - Gmb * Ps / Gsb
       const gmb = Number(this.gmb)
       const ps = Number(this.ps)
       const gsb = Number(this.gsb)
-      if (gmb !== 0 && ps !== 0 && gsb !== 0) {
-        const vma = 100 - (gmb * ps) / gsb
-        return vma.toFixed(3)
-      }
+      if (gmb === 0 && ps === 0 && gsb === 0) return '0.000'
+      const vma = 100 - (gmb * ps) / gsb
+      return vma.toFixed(3)
     }
-  }
+  },
+
+  watch: {
+    gmb_() {
+      const gmb = this.gmb
+      this.updateGmb({ value: gmb })
+    }
+  },
+
+  methods: {
+    ...mapMutations('amaac', ['updateGmb', 'updateGsb', 'updatePs']),
+    calculateGmb() {
+      const gmb = this.gmb_
+      this.updateGmb({ value: gmb })
+    },
+    calculateGsb() {
+      const gsb = this.gsb_
+      this.updateGsb({ value: gsb })
+    },
+    calculatePs() {
+      const ps = this.ps_
+      this.updatePs({ value: ps })
+    }
+  },
+
+  mounted() {
+    this.gmb_ = this.gmb
+    this.gsb_ = this.gsb
+    this.ps_ = this.ps
+  },
 }
 </script>

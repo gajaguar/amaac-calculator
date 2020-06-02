@@ -26,11 +26,7 @@
 <script>
 import AppField from '@/components/AppField.vue'
 import { mapMutations } from 'vuex'
-import {
-  aggregatesAbsorption,
-  aggregatesApparentGravity,
-  aggregatesBulkGravity
-} from '@/utils/amaac'
+import aggregates from '@/utils/amaac/calculations/aggregates'
 
 export default {
   name: 'AggregatesBulkGravity',
@@ -38,9 +34,7 @@ export default {
   components: { AppField },
 
   data: () => ({
-    aggregatesAbsorption,
-    aggregatesApparentGravity,
-    aggregatesBulkGravity,
+    aggregates,
     wd: '',
     wi: '',
     wssd: ''
@@ -49,15 +43,15 @@ export default {
   methods: {
     ...mapMutations('amaac', ['updateAbs', 'updateGsa', 'updateGsb']),
     calculateAbs() {
-      const abs = this.aggregatesAbsorption(this.wssd, this.wd)
+      const abs = this.aggregates.absorption(this.wssd, this.wd)
       this.updateAbs({ value: abs })
     },
     calculateGsa() {
-      const gsa = this.aggregatesApparentGravity(this.wd, this.wi)
+      const gsa = this.aggregates.gravity.apparent(this.wd, this.wi)
       this.updateGsa({ value: gsa })
     },
     calculateGsb() {
-      const gsb = this.aggregatesBulkGravity(this.wd, this.wssd, this.wi)
+      const gsb = this.aggregates.gravity.bulk(this.wd, this.wssd, this.wi)
       this.updateGsb({ value: gsb })
     },
     calculateAll() {

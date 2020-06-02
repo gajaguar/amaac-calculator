@@ -29,7 +29,7 @@
 <script>
 import AppField from '@/components/AppField.vue'
 import { mapMutations } from 'vuex'
-import { mixtureBulkGravity } from '@/utils/amaac'
+import mixture from '@/utils/amaac/calculations/mixture'
 
 export default {
   name: 'MixtureBulkGravity',
@@ -37,7 +37,7 @@ export default {
   components: { AppField },
 
   data: () => ({
-    mixtureBulkGravity,
+    mixture,
     wd: '',
     wi: '',
     wssd: ''
@@ -46,7 +46,7 @@ export default {
   methods: {
     ...mapMutations('amaac', ['updateGmb']),
     calculateGmb() {
-      const gmb = this.mixtureBulkGravity(this.wd, this.wssd, this.wi)
+      const gmb = this.mixture.gravity.bulk(this.wd, this.wssd, this.wi)
       this.updateGmb({ value: gmb })
     },
     calculateAll() {

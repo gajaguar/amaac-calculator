@@ -33,7 +33,7 @@
 <script>
 import AppField from '@/components/AppField.vue'
 import { mapMutations } from 'vuex'
-import { asphaltBulkGravity } from '@/utils/amaac'
+import asphalt from '@/utils/amaac/calculations/asphalt'
 
 export default {
   name: 'AsphaltGravity',
@@ -41,17 +41,22 @@ export default {
   components: { AppField },
 
   data: () => ({
-    asphaltBulkGravity,
-    wp: '0.0',
-    wpb: '0.0',
-    wpw: '0.0',
-    wpbw: '0.0'
+    asphalt,
+    wp: '',
+    wpb: '',
+    wpw: '',
+    wpbw: ''
   }),
 
   methods: {
     ...mapMutations('amaac', ['updateGb']),
     calculateGb() {
-      const gb = this.asphaltBulkGravity(this.wp, this.wpw, this.wpb, this.wpbw)
+      const gb = this.asphalt.gravity.bulk(
+        this.wp,
+        this.wpw,
+        this.wpb,
+        this.wpbw
+      )
       this.updateGb({ value: gb })
     },
     calculateAll() {

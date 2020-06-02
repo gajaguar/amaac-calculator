@@ -19,12 +19,18 @@
           <asphalt-content v-show="tabs[0].active" />
           <aggregates-bulk-gravity v-show="tabs[1].active" />
           <asphalt-gravity v-show="tabs[2].active" />
-          <mixture-bulk-gravity v-show="tabs[3].active" />
+          <mixture-bulk-gravity v-show="tabs[3].active" /><br />
+          <mixture-max-gravity v-show="tabs[3].active" />
         </div>
       </div>
       <div class="tile is-parent is-4">
         <div class="tile is-child box">
-          <results />
+          <direct />
+        </div>
+      </div>
+      <div class="tile is-parent is-4">
+        <div class="tile is-child box">
+          <derived />
         </div>
       </div>
     </div>
@@ -36,7 +42,9 @@ import AggregatesBulkGravity from '@/views/calculators/amaac/AggregatesBulkGravi
 import AsphaltContent from '@/views/calculators/amaac/AsphaltContent.vue'
 import AsphaltGravity from '@/views/calculators/amaac/AsphaltGravity.vue'
 import MixtureBulkGravity from '@/views/calculators/amaac/MixtureBulkGravity.vue'
-import Results from '@/views/calculators/amaac/Results.vue'
+import MixtureMaxGravity from '@/views/calculators/amaac/MixtureMaxGravity.vue'
+import Direct from '@/views/calculators/amaac/Direct.vue'
+import Derived from '@/views/calculators/amaac/Derived.vue'
 
 export default {
   name: 'Index',
@@ -46,7 +54,9 @@ export default {
     AsphaltContent,
     AsphaltGravity,
     MixtureBulkGravity,
-    Results
+    MixtureMaxGravity,
+    Direct,
+    Derived
   },
 
   data: () => ({
