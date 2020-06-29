@@ -84,6 +84,6 @@ export default {
     this.gmb_ = this.gmb
     this.gsb_ = this.gsb
     this.ps_ = this.ps
-  },
+  }
 }
 </script>

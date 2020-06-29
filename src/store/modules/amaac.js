@@ -22,8 +22,8 @@ export default {
   },
 
   getters: {
-    abs: state => state.abs,
-    fb: state => {
+    abs: (state) => state.abs,
+    fb: (state) => {
       // F/B = P-200 / Pb'
       const p200 = Number(state.p200)
       const pb_ = Number(state.pb_)
@@ -32,12 +32,12 @@ export default {
       state.fb = fb.toFixed(3)
       return fb.toFixed(3)
     },
-    gb: state => state.gb,
-    gmb: state => state.gmb,
-    gmm: state => state.gmm,
-    gsa: state => state.gsa,
-    gsb: state => state.gsb,
-    gse: state => {
+    gb: (state) => state.gb,
+    gmb: (state) => state.gmb,
+    gmm: (state) => state.gmm,
+    gsa: (state) => state.gsa,
+    gsb: (state) => state.gsb,
+    gse: (state) => {
       // Gse = (Pmm - Pb) / (Pmm / Gmm - Pb / Gb)
       const gb = Number(state.gb)
       const gmm = Number(state.gmm)
@@ -48,7 +48,7 @@ export default {
       state.gse = gse.toFixed(3)
       return gse.toFixed(3)
     },
-    pa: state => {
+    pa: (state) => {
       // Pa = (Gmm - Gmb) / Gmm * 100
       const gmb = Number(state.gmb)
       const gmm = Number(state.gmm)
@@ -57,9 +57,9 @@ export default {
       state.pa = pa.toFixed(3)
       return pa.toFixed(3)
     },
-    pb_: state => state.pb_,
-    pb: state => state.pb,
-    pba: state => {
+    pb_: (state) => state.pb_,
+    pb: (state) => state.pb,
+    pba: (state) => {
       // Pba = 100 * ((Gse - Gsb) / (Gsb * Gse)) * Gb
       const gb = Number(state.gb)
       const gsb = Number(state.gsb)
@@ -69,7 +69,7 @@ export default {
       state.pba = pba.toFixed(3)
       return pba.toFixed(3)
     },
-    pbe: state => {
+    pbe: (state) => {
       // Pbe = Pb - (Pba / 100) * Ps
       const pb = Number(state.pb)
       const pba = Number(state.pba)
@@ -79,8 +79,8 @@ export default {
       state.pbe = pbe.toFixed(3)
       return pbe.toFixed(3)
     },
-    ps: state => state.ps,
-    vfa: state => {
+    ps: (state) => state.ps,
+    vfa: (state) => {
       // VFA = (VMA - Pa) / VMA * 100
       const pa = Number(state.pa)
       const vma = Number(state.vma)
@@ -89,7 +89,7 @@ export default {
       state.vfa = vfa.toFixed(3)
       return vfa.toFixed(3)
     },
-    vma: state => {
+    vma: (state) => {
       // VMA = 100 - (Gmb * Ps) / Gsb
       const gmb = Number(state.gmb)
       const gsb = Number(state.gsb)

@@ -8,7 +8,7 @@ export default {
       if (wbi === 0 || wbf === 0 || wp === 0) return ''
       return (((wbi - wbf) / (wbf - wp)) * 100).toFixed(3)
     },
-    byMixture: pb_ => {
+    byMixture: (pb_) => {
       // Pb = Pb' / (100 + Pb') * 100
       pb_ = Number(pb_)
       if (pb_ === 0) return ''

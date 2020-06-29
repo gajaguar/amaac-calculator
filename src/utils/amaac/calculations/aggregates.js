@@ -7,7 +7,7 @@ export default {
     return (((wssd - wd) / wd) * 100).toFixed(3)
   },
   content: {
-    byMixture: pb => {
+    byMixture: (pb) => {
       // Ps = 100 - Pb
       pb = Number(pb)
       if (pb === 0) return ''
