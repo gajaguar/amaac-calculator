@@ -26,48 +26,11 @@
 
     <div id="navbar-menu" class="navbar-menu" ref="menu">
       <div class="navbar-start">
-        <router-link :to="{ name: 'home' }" v-slot="{ href, navigate }">
-          <a class="navbar-item" :href="href" @click="goAndClose(navigate)"
-            >Inicio</a
-          >
-        </router-link>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Calculadoras
-          </a>
-
-          <div class="navbar-dropdown">
-            <router-link
-              :to="{ name: 'calculators.amaac' }"
-              v-slot="{ href, navigate }"
-            >
-              <a class="navbar-item" :href="href" @click="goAndClose(navigate)"
-                >Amaac</a
-              >
-            </router-link>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Generadores
-          </a>
-
-          <div class="navbar-dropdown">
-            <router-link
-              :to="{ name: 'generators.amaac' }"
-              v-slot="{ href, navigate }"
-            >
-              <a class="navbar-item" :href="href" @click="goAndClose(navigate)"
-                >Amaac</a
-              >
-            </router-link>
-          </div>
-        </div>
+        <!-- left align items -->
       </div>
 
       <div class="navbar-end">
-        <!-- navbar-items-->
+        <!-- right align items-->
       </div>
     </div>
   </nav>
@@ -78,7 +41,7 @@ export default {
   name: 'AppNavbar',
 
   data: () => ({
-    title: 'LAB TOOLS'
+    title: 'AMAAC CALCULATOR'
   }),
 
   methods: {

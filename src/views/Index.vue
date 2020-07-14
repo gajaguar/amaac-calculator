@@ -38,13 +38,13 @@
 </template>
 
 <script>
-import AggregatesBulkGravity from '@/views/calculators/amaac/AggregatesBulkGravity.vue'
-import AsphaltContent from '@/views/calculators/amaac/AsphaltContent.vue'
-import AsphaltGravity from '@/views/calculators/amaac/AsphaltGravity.vue'
-import MixtureBulkGravity from '@/views/calculators/amaac/MixtureBulkGravity.vue'
-import MixtureMaxGravity from '@/views/calculators/amaac/MixtureMaxGravity.vue'
-import Direct from '@/views/calculators/amaac/Direct.vue'
-import Derived from '@/views/calculators/amaac/Derived.vue'
+import AggregatesBulkGravity from '@/components/AggregatesBulkGravity.vue'
+import AsphaltContent from '@/components/AsphaltContent.vue'
+import AsphaltGravity from '@/components/AsphaltGravity.vue'
+import MixtureBulkGravity from '@/components/MixtureBulkGravity.vue'
+import MixtureMaxGravity from '@/components/MixtureMaxGravity.vue'
+import Direct from '@/components/Direct.vue'
+import Derived from '@/components/Derived.vue'
 
 export default {
   name: 'Index',

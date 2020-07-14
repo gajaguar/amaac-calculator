@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Base from '@/router/base'
-import Calculators from '@/router/calculators'
-import Generators from '@/router/generators'
+import Index from '@/views/Index.vue'
 
 Vue.use(VueRouter)
 
-let routeComponents = []
-
-const routes = routeComponents.concat(Base, Calculators, Generators)
+const routes = [
+  {
+    path: '/',
+    name: 'index',
+    component: Index
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',

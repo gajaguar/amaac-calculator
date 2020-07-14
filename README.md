@@ -1,4 +1,4 @@
-# lab-tools
+# AMAAC Calculator
 
 ## Project setup
 ```

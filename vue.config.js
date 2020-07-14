@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/lab-tools/' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/amaac-calculator/' : '/'
 }
